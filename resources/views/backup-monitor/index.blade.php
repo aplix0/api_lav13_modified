@@ -37,7 +37,7 @@
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.76);
+            background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
         }
@@ -77,6 +77,17 @@
                 background-position: -100% 0;
             }
         }
+
+        @media (max-width: 640px) {
+            .mobile-safe-title {
+                line-height: 1.05;
+                letter-spacing: -0.04em;
+            }
+
+            .mobile-card-radius {
+                border-radius: 1.25rem;
+            }
+        }
     </style>
 </head>
 
@@ -84,15 +95,15 @@
     <div class="min-h-screen">
         <section class="mesh-bg relative overflow-hidden">
             <div class="absolute inset-0 opacity-30">
-                <div class="absolute left-10 top-16 h-28 w-28 rounded-full bg-cyan-400 blur-3xl"></div>
-                <div class="absolute right-20 top-20 h-36 w-36 rounded-full bg-indigo-500 blur-3xl"></div>
-                <div class="absolute bottom-4 left-1/2 h-28 w-28 rounded-full bg-emerald-400 blur-3xl"></div>
+                <div class="absolute left-4 top-16 h-24 w-24 rounded-full bg-cyan-400 blur-3xl sm:left-10 sm:h-28 sm:w-28"></div>
+                <div class="absolute right-4 top-28 h-28 w-28 rounded-full bg-indigo-500 blur-3xl sm:right-20 sm:top-20 sm:h-36 sm:w-36"></div>
+                <div class="absolute bottom-4 left-1/2 h-24 w-24 rounded-full bg-emerald-400 blur-3xl sm:h-28 sm:w-28"></div>
             </div>
 
-            <div class="relative mx-auto max-w-7xl px-4 py-7 sm:px-6 lg:px-8">
-                <nav class="flex items-center justify-between">
+            <div class="relative mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-7 lg:px-8">
+                <nav class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div class="flex items-center gap-3">
-                        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-lg font-black text-slate-950 shadow-glow">
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white text-lg font-black text-slate-950 shadow-glow">
                             NM
                         </div>
 
@@ -102,60 +113,60 @@
                         </div>
                     </div>
 
-                    <div class="hidden items-center gap-3 sm:flex">
-                        <div id="statusBadge" class="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white">
+                    <div class="flex flex-col gap-3 xs:flex-row sm:flex-row sm:items-center">
+                        <div id="statusBadge" class="flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold text-white sm:text-sm">
                             <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
                             Realtime aktif
                         </div>
 
-                        <button onclick="loadAll(true)" class="rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-950/20 transition hover:scale-[1.02] hover:bg-slate-100">
+                        <button onclick="loadAll(true)" class="w-full rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-950/20 transition hover:scale-[1.02] hover:bg-slate-100 sm:w-auto">
                             Sync sekarang
                         </button>
                     </div>
                 </nav>
 
-                <div class="grid gap-8 py-14 lg:grid-cols-12 lg:items-end">
+                <div class="grid gap-8 py-10 sm:py-12 lg:grid-cols-12 lg:items-end lg:py-14">
                     <div class="lg:col-span-7">
-                        <p class="mb-5 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-100">
+                        <p class="mb-5 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold text-cyan-100 sm:text-sm">
                             Dashboard Backup
                         </p>
 
-                        <h1 class="max-w-4xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+                        <h1 class="mobile-safe-title max-w-4xl text-3xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
                             Pantau backup Noted Money secara langsung.
                         </h1>
 
-                        <p class="mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+                        <p class="mt-5 max-w-2xl text-sm leading-6 text-slate-300 sm:text-lg sm:leading-8">
                             Lihat ringkasan, daftar backup, dan detail transaksi dalam satu dashboard tanpa memuat ulang halaman.
                         </p>
                     </div>
 
                     <div class="lg:col-span-5">
-                        <div class="dark-glass rounded-3xl border border-white/10 p-5 shadow-glow">
-                            <div class="flex items-start justify-between">
-                                <div>
+                        <div class="dark-glass mobile-card-radius rounded-3xl border border-white/10 p-4 shadow-glow sm:p-5">
+                            <div class="flex items-start justify-between gap-4">
+                                <div class="min-w-0">
                                     <p class="text-sm text-slate-300">Saldo backup</p>
-                                    <h2 id="heroSaldo" class="mt-2 text-4xl font-black text-white">Rp0</h2>
+                                    <h2 id="heroSaldo" class="mt-2 break-words text-3xl font-black text-white sm:text-4xl">Rp0</h2>
                                 </div>
 
-                                <div class="rounded-2xl bg-emerald-400/15 px-3 py-2 text-xs font-bold text-emerald-300">
+                                <div class="shrink-0 rounded-2xl bg-emerald-400/15 px-3 py-2 text-xs font-bold text-emerald-300">
                                     LIVE
                                 </div>
                             </div>
 
-                            <div class="mt-6 grid grid-cols-2 gap-3">
+                            <div class="mt-6 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2">
                                 <div class="rounded-2xl bg-white/10 p-4">
                                     <p class="text-xs text-slate-300">Pemasukan</p>
-                                    <p id="heroPemasukan" class="mt-1 text-xl font-bold text-emerald-300">Rp0</p>
+                                    <p id="heroPemasukan" class="mt-1 break-words text-lg font-bold text-emerald-300 sm:text-xl">Rp0</p>
                                 </div>
 
                                 <div class="rounded-2xl bg-white/10 p-4">
                                     <p class="text-xs text-slate-300">Pengeluaran</p>
-                                    <p id="heroPengeluaran" class="mt-1 text-xl font-bold text-red-300">Rp0</p>
+                                    <p id="heroPengeluaran" class="mt-1 break-words text-lg font-bold text-red-300 sm:text-xl">Rp0</p>
                                 </div>
                             </div>
 
                             <div class="mt-5 rounded-2xl bg-white/10 p-4">
-                                <div class="flex items-center justify-between text-sm">
+                                <div class="flex flex-col gap-1 text-sm min-[420px]:flex-row min-[420px]:items-center min-[420px]:justify-between">
                                     <span class="text-slate-300">Sinkronisasi</span>
                                     <span id="lastSyncHero" class="font-semibold text-white">Menunggu data</span>
                                 </div>
@@ -170,9 +181,9 @@
             </div>
         </section>
 
-        <main class="relative mx-auto -mt-10 max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
-            <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-                <div class="glass rounded-3xl border border-white p-5 shadow-soft">
+        <main class="relative mx-auto -mt-8 max-w-7xl px-4 pb-8 sm:-mt-10 sm:px-6 sm:pb-10 lg:px-8">
+            <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                <div class="glass mobile-card-radius rounded-3xl border border-white p-4 shadow-soft sm:p-5">
                     <div class="flex items-center justify-between">
                         <p class="text-sm font-semibold text-slate-500">Total Backup</p>
                         <div class="rounded-2xl bg-cyan-50 px-3 py-2 text-cyan-700">↗</div>
@@ -181,7 +192,7 @@
                     <p class="mt-1 text-xs text-slate-500">Jumlah sesi backup yang masuk</p>
                 </div>
 
-                <div class="glass rounded-3xl border border-white p-5 shadow-soft">
+                <div class="glass mobile-card-radius rounded-3xl border border-white p-4 shadow-soft sm:p-5">
                     <div class="flex items-center justify-between">
                         <p class="text-sm font-semibold text-slate-500">Total Transaksi</p>
                         <div class="rounded-2xl bg-indigo-50 px-3 py-2 text-indigo-700">◆</div>
@@ -190,41 +201,41 @@
                     <p class="mt-1 text-xs text-slate-500">Data transaksi dari seluruh backup</p>
                 </div>
 
-                <div class="glass rounded-3xl border border-white p-5 shadow-soft">
+                <div class="glass mobile-card-radius rounded-3xl border border-white p-4 shadow-soft sm:p-5">
                     <div class="flex items-center justify-between">
                         <p class="text-sm font-semibold text-slate-500">Pemasukan</p>
                         <div class="rounded-2xl bg-emerald-50 px-3 py-2 text-emerald-700">+</div>
                     </div>
-                    <h2 id="totalPemasukan" class="mt-4 text-3xl font-black text-emerald-600">Rp0</h2>
+                    <h2 id="totalPemasukan" class="mt-4 break-words text-2xl font-black text-emerald-600 sm:text-3xl">Rp0</h2>
                     <p class="mt-1 text-xs text-slate-500">Total uang masuk</p>
                 </div>
 
-                <div class="glass rounded-3xl border border-white p-5 shadow-soft">
+                <div class="glass mobile-card-radius rounded-3xl border border-white p-4 shadow-soft sm:p-5">
                     <div class="flex items-center justify-between">
                         <p class="text-sm font-semibold text-slate-500">Pengeluaran</p>
                         <div class="rounded-2xl bg-red-50 px-3 py-2 text-red-700">−</div>
                     </div>
-                    <h2 id="totalPengeluaran" class="mt-4 text-3xl font-black text-red-600">Rp0</h2>
+                    <h2 id="totalPengeluaran" class="mt-4 break-words text-2xl font-black text-red-600 sm:text-3xl">Rp0</h2>
                     <p class="mt-1 text-xs text-slate-500">Total uang keluar</p>
                 </div>
 
-                <div class="glass rounded-3xl border border-white p-5 shadow-soft">
+                <div class="glass mobile-card-radius rounded-3xl border border-white p-4 shadow-soft sm:col-span-2 sm:p-5 lg:col-span-1 xl:col-span-1">
                     <div class="flex items-center justify-between">
                         <p class="text-sm font-semibold text-slate-500">Saldo</p>
                         <div class="rounded-2xl bg-slate-100 px-3 py-2 text-slate-700">Σ</div>
                     </div>
-                    <h2 id="totalSaldo" class="mt-4 text-3xl font-black">Rp0</h2>
+                    <h2 id="totalSaldo" class="mt-4 break-words text-2xl font-black sm:text-3xl">Rp0</h2>
                     <p class="mt-1 text-xs text-slate-500">Pemasukan dikurangi pengeluaran</p>
                 </div>
             </section>
 
             <section class="mt-6 grid gap-6 lg:grid-cols-12">
                 <aside class="lg:col-span-5">
-                    <div class="overflow-hidden rounded-3xl border border-white bg-white shadow-soft">
-                        <div class="border-b border-slate-100 p-5">
-                            <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div class="mobile-card-radius overflow-hidden rounded-3xl border border-white bg-white shadow-soft">
+                        <div class="border-b border-slate-100 p-4 sm:p-5">
+                            <div class="flex flex-col gap-4 min-[420px]:flex-row min-[420px]:items-start min-[420px]:justify-between">
                                 <div>
-                                    <h2 class="text-xl font-black">Daftar Backup</h2>
+                                    <h2 class="text-lg font-black sm:text-xl">Daftar Backup</h2>
                                     <p id="lastSync" class="mt-1 text-sm text-slate-500">Menunggu sinkronisasi</p>
                                 </div>
 
@@ -248,7 +259,7 @@
                             </div>
                         </div>
 
-                        <div id="backupList" class="soft-scroll max-h-[690px] overflow-y-auto p-4">
+                        <div id="backupList" class="soft-scroll max-h-[520px] overflow-y-auto p-4 sm:max-h-[690px]">
                             <div class="space-y-3">
                                 <div class="skeleton h-28 rounded-3xl"></div>
                                 <div class="skeleton h-28 rounded-3xl"></div>
@@ -259,36 +270,48 @@
                 </aside>
 
                 <section class="lg:col-span-7">
-                    <div class="overflow-hidden rounded-3xl border border-white bg-white shadow-soft">
-                        <div class="border-b border-slate-100 p-5">
+                    <div class="mobile-card-radius overflow-hidden rounded-3xl border border-white bg-white shadow-soft">
+                        <div class="border-b border-slate-100 p-4 sm:p-5">
                             <div class="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
                                 <div>
-                                    <h2 class="text-xl font-black">Detail Transaksi</h2>
+                                    <h2 class="text-lg font-black sm:text-xl">Detail Transaksi</h2>
                                     <p id="detailTitle" class="mt-1 text-sm text-slate-500">
                                         Pilih backup untuk melihat rincian transaksi.
                                     </p>
                                 </div>
 
-                                <div class="grid grid-cols-3 gap-2">
+                                <div class="grid grid-cols-1 gap-2 min-[420px]:grid-cols-3">
                                     <div class="rounded-2xl bg-emerald-50 px-4 py-3">
                                         <p class="text-xs font-semibold text-emerald-700">Masuk</p>
-                                        <p id="detailPemasukan" class="mt-1 text-sm font-black text-emerald-700">Rp0</p>
+                                        <p id="detailPemasukan" class="mt-1 break-words text-sm font-black text-emerald-700">Rp0</p>
                                     </div>
 
                                     <div class="rounded-2xl bg-red-50 px-4 py-3">
                                         <p class="text-xs font-semibold text-red-700">Keluar</p>
-                                        <p id="detailPengeluaran" class="mt-1 text-sm font-black text-red-700">Rp0</p>
+                                        <p id="detailPengeluaran" class="mt-1 break-words text-sm font-black text-red-700">Rp0</p>
                                     </div>
 
                                     <div class="rounded-2xl bg-slate-100 px-4 py-3">
                                         <p class="text-xs font-semibold text-slate-700">Saldo</p>
-                                        <p id="detailSaldo" class="mt-1 text-sm font-black text-slate-950">Rp0</p>
+                                        <p id="detailSaldo" class="mt-1 break-words text-sm font-black text-slate-950">Rp0</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="soft-scroll max-h-[690px] overflow-auto">
+                        <div id="detailCards" class="soft-scroll max-h-[560px] overflow-y-auto p-4 md:hidden">
+                            <div class="rounded-3xl bg-slate-50 px-5 py-12 text-center">
+                                <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-white text-2xl shadow-sm">
+                                    ⌁
+                                </div>
+                                <h3 class="mt-5 text-lg font-black">Belum ada backup dipilih</h3>
+                                <p class="mt-2 text-sm leading-6 text-slate-500">
+                                    Pilih salah satu data backup untuk melihat transaksi secara detail.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="soft-scroll hidden max-h-[690px] overflow-auto md:block">
                             <table class="w-full min-w-[760px] text-left text-sm">
                                 <thead class="sticky top-0 z-10 bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
                                     <tr>
@@ -321,12 +344,12 @@
             </section>
         </main>
 
-        <footer class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
-            <div class="overflow-hidden rounded-3xl border border-white bg-slate-950 shadow-soft">
-                <div class="grid gap-6 px-6 py-6 md:grid-cols-3 md:items-center">
+        <footer class="mx-auto max-w-7xl px-4 pb-6 sm:px-6 sm:pb-8 lg:px-8">
+            <div class="mobile-card-radius overflow-hidden rounded-3xl border border-white bg-slate-950 shadow-soft">
+                <div class="grid gap-6 px-5 py-6 sm:px-6 md:grid-cols-3 md:items-center">
                     <div>
                         <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-sm font-black text-slate-950">
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white text-sm font-black text-slate-950">
                                 NM
                             </div>
 
@@ -350,7 +373,7 @@
         </footer>
     </div>
 
-    <div id="toast" class="pointer-events-none fixed bottom-5 right-5 z-50 hidden rounded-2xl bg-slate-950 px-5 py-4 text-sm font-semibold text-white shadow-2xl">
+    <div id="toast" class="pointer-events-none fixed bottom-4 left-4 right-4 z-50 hidden rounded-2xl bg-slate-950 px-5 py-4 text-center text-sm font-semibold text-white shadow-2xl sm:left-auto sm:right-5 sm:w-fit">
         Data berhasil disinkronkan
     </div>
 
@@ -385,6 +408,7 @@
             backupList: document.getElementById('backupList'),
             detailTitle: document.getElementById('detailTitle'),
             detailTable: document.getElementById('detailTable'),
+            detailCards: document.getElementById('detailCards'),
             detailPemasukan: document.getElementById('detailPemasukan'),
             detailPengeluaran: document.getElementById('detailPengeluaran'),
             detailSaldo: document.getElementById('detailSaldo'),
@@ -440,7 +464,7 @@
                 dot = 'bg-red-200'
             }
 
-            el.statusBadge.className = `flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white ${color}`
+            el.statusBadge.className = `flex w-fit items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs font-semibold text-white sm:text-sm ${color}`
             el.statusBadge.innerHTML = `<span class="h-2 w-2 animate-pulse rounded-full ${dot}"></span>${text}`
         }
 
@@ -527,7 +551,7 @@
 
             if (!filtered.length) {
                 el.backupList.innerHTML = `
-                    <div class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                    <div class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center sm:p-8">
                         <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-2xl shadow-sm">
                             ⌕
                         </div>
@@ -550,23 +574,23 @@
                         data-id="${escapeHtml(item.id)}"
                         class="backup-card mb-3 w-full rounded-3xl border p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-950 hover:bg-slate-50 hover:shadow-lg ${activeClass}"
                     >
-                        <div class="flex items-start justify-between gap-4">
+                        <div class="flex flex-col gap-3 min-[420px]:flex-row min-[420px]:items-start min-[420px]:justify-between">
                             <div class="min-w-0">
                                 <div class="flex items-center gap-2">
-                                    <span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+                                    <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500"></span>
                                     <h3 class="truncate font-black text-slate-950">${escapeHtml(item.nama)}</h3>
                                 </div>
 
-                                <p class="mt-2 text-xs font-medium text-slate-500">ID ${escapeHtml(item.id)}</p>
+                                <p class="mt-2 break-all text-xs font-medium text-slate-500">ID ${escapeHtml(item.id)}</p>
                                 <p class="mt-1 text-xs text-slate-400">${formatDate(item.waktu)}</p>
                             </div>
 
-                            <span class="rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white">
+                            <span class="w-fit rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white">
                                 ${escapeHtml(item.channel || 'laravel')}
                             </span>
                         </div>
 
-                        <div class="mt-4 grid grid-cols-3 gap-2">
+                        <div class="mt-4 grid grid-cols-1 gap-2 min-[420px]:grid-cols-3">
                             <div class="rounded-2xl bg-slate-100 p-3">
                                 <p class="text-[11px] font-semibold text-slate-500">Transaksi</p>
                                 <p class="mt-1 font-black text-slate-950">${item.total_transaksi || 0}</p>
@@ -574,12 +598,12 @@
 
                             <div class="rounded-2xl bg-emerald-50 p-3">
                                 <p class="text-[11px] font-semibold text-emerald-700">Masuk</p>
-                                <p class="mt-1 truncate font-black text-emerald-700">${rupiah(item.total_pemasukan)}</p>
+                                <p class="mt-1 break-words font-black text-emerald-700">${rupiah(item.total_pemasukan)}</p>
                             </div>
 
                             <div class="rounded-2xl bg-slate-100 p-3">
                                 <p class="text-[11px] font-semibold text-slate-500">Saldo</p>
-                                <p class="mt-1 truncate font-black text-slate-950">${rupiah(item.saldo)}</p>
+                                <p class="mt-1 break-words font-black text-slate-950">${rupiah(item.saldo)}</p>
                             </div>
                         </div>
                     </button>
@@ -609,6 +633,20 @@
 
         function renderDetail(data) {
             if (!data.length) {
+                const emptyState = `
+                    <div class="rounded-3xl bg-slate-50 px-5 py-12 text-center">
+                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-white text-2xl shadow-sm">
+                            Ø
+                        </div>
+                        <h3 class="mt-5 text-lg font-black">Detail tidak tersedia</h3>
+                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                            Backup ini belum memiliki transaksi atau data tidak ditemukan.
+                        </p>
+                    </div>
+                `
+
+                el.detailCards.innerHTML = emptyState
+
                 el.detailTable.innerHTML = `
                     <tr>
                         <td colspan="4" class="px-5 py-20 text-center">
@@ -634,7 +672,7 @@
             let pemasukan = 0
             let pengeluaran = 0
 
-            el.detailTable.innerHTML = data.map(item => {
+            el.detailCards.innerHTML = data.map(item => {
                 const nominal = Number(item.nominal || 0)
                 const isIncome = item.jenis === '+'
 
@@ -642,6 +680,43 @@
                     pemasukan += nominal
                 } else {
                     pengeluaran += nominal
+                }
+
+                return `
+                    <div class="mb-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="min-w-0">
+                                <p class="font-black text-slate-950">${escapeHtml(item.uraian)}</p>
+                                <p class="mt-1 text-xs text-slate-400">${formatDate(item.tgl_jam)}</p>
+                                <p class="mt-1 break-all text-xs text-slate-400">ID ${escapeHtml(item.id)}</p>
+                            </div>
+
+                            <span class="shrink-0 rounded-full px-3 py-1 text-xs font-bold ${isIncome ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}">
+                                ${isIncome ? 'Masuk' : 'Keluar'}
+                            </span>
+                        </div>
+
+                        <div class="mt-4 rounded-2xl ${isIncome ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-700'} p-3">
+                            <p class="text-xs font-semibold">Nominal</p>
+                            <p class="mt-1 break-words text-xl font-black">
+                                ${isIncome ? '+' : '-'} ${rupiah(nominal)}
+                            </p>
+                        </div>
+                    </div>
+                `
+            }).join('')
+
+            let pemasukanTable = 0
+            let pengeluaranTable = 0
+
+            el.detailTable.innerHTML = data.map(item => {
+                const nominal = Number(item.nominal || 0)
+                const isIncome = item.jenis === '+'
+
+                if (isIncome) {
+                    pemasukanTable += nominal
+                } else {
+                    pengeluaranTable += nominal
                 }
 
                 return `
