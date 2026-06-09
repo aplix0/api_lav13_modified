@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noted Money Backup Monitor</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/js/app.js'])
 
     <script>
         tailwind.config = {
@@ -250,8 +252,7 @@
                                         id="searchBackup"
                                         type="text"
                                         placeholder="Cari nama backup atau ID..."
-                                        class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 pl-11 text-sm outline-none transition focus:border-slate-950 focus:bg-white"
-                                    >
+                                        class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 pl-11 text-sm outline-none transition focus:border-slate-950 focus:bg-white">
                                     <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
                                         ⌕
                                     </div>
@@ -500,7 +501,6 @@
 
             el.totalBackup.textContent = data.total_backup || 0
             el.totalTransaksi.textContent = data.total_transaksi || 0
-
             el.totalPemasukan.textContent = rupiah(data.total_pemasukan)
             el.totalPengeluaran.textContent = rupiah(data.total_pengeluaran)
             el.totalSaldo.textContent = rupiah(data.saldo)
@@ -551,16 +551,13 @@
 
             if (!filtered.length) {
                 el.backupList.innerHTML = `
-                    <div class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center sm:p-8">
-                        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-2xl shadow-sm">
-                            ⌕
-                        </div>
-                        <h3 class="mt-4 font-black text-slate-950">Backup tidak ditemukan</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-500">
-                            Coba gunakan kata kunci lain atau lakukan backup baru dari aplikasi Noted Money.
-                        </p>
-                    </div>
-                `
+                <div class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center sm:p-8">
+                    <h3 class="font-black text-slate-950">Backup tidak ditemukan</h3>
+                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                        Coba gunakan kata kunci lain atau lakukan backup baru dari aplikasi Noted Money.
+                    </p>
+                </div>
+            `
                 return
             }
 
@@ -569,45 +566,45 @@
                 const activeClass = isActive ? 'border-slate-950 bg-slate-50 shadow-lg' : 'border-slate-200 bg-white'
 
                 return `
-                    <button
-                        type="button"
-                        data-id="${escapeHtml(item.id)}"
-                        class="backup-card mb-3 w-full rounded-3xl border p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-950 hover:bg-slate-50 hover:shadow-lg ${activeClass}"
-                    >
-                        <div class="flex flex-col gap-3 min-[420px]:flex-row min-[420px]:items-start min-[420px]:justify-between">
-                            <div class="min-w-0">
-                                <div class="flex items-center gap-2">
-                                    <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500"></span>
-                                    <h3 class="truncate font-black text-slate-950">${escapeHtml(item.nama)}</h3>
-                                </div>
-
-                                <p class="mt-2 break-all text-xs font-medium text-slate-500">ID ${escapeHtml(item.id)}</p>
-                                <p class="mt-1 text-xs text-slate-400">${formatDate(item.waktu)}</p>
+                <button
+                    type="button"
+                    data-id="${escapeHtml(item.id)}"
+                    class="backup-card mb-3 w-full rounded-3xl border p-4 text-left transition duration-200 hover:-translate-y-0.5 hover:border-slate-950 hover:bg-slate-50 hover:shadow-lg ${activeClass}"
+                >
+                    <div class="flex flex-col gap-3 min-[420px]:flex-row min-[420px]:items-start min-[420px]:justify-between">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2">
+                                <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500"></span>
+                                <h3 class="truncate font-black text-slate-950">${escapeHtml(item.nama)}</h3>
                             </div>
 
-                            <span class="w-fit rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white">
-                                ${escapeHtml(item.channel || 'laravel')}
-                            </span>
+                            <p class="mt-2 break-all text-xs font-medium text-slate-500">ID ${escapeHtml(item.id)}</p>
+                            <p class="mt-1 text-xs text-slate-400">${formatDate(item.waktu)}</p>
                         </div>
 
-                        <div class="mt-4 grid grid-cols-1 gap-2 min-[420px]:grid-cols-3">
-                            <div class="rounded-2xl bg-slate-100 p-3">
-                                <p class="text-[11px] font-semibold text-slate-500">Transaksi</p>
-                                <p class="mt-1 font-black text-slate-950">${item.total_transaksi || 0}</p>
-                            </div>
+                        <span class="w-fit rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white">
+                            ${escapeHtml(item.channel || 'laravel')}
+                        </span>
+                    </div>
 
-                            <div class="rounded-2xl bg-emerald-50 p-3">
-                                <p class="text-[11px] font-semibold text-emerald-700">Masuk</p>
-                                <p class="mt-1 break-words font-black text-emerald-700">${rupiah(item.total_pemasukan)}</p>
-                            </div>
-
-                            <div class="rounded-2xl bg-slate-100 p-3">
-                                <p class="text-[11px] font-semibold text-slate-500">Saldo</p>
-                                <p class="mt-1 break-words font-black text-slate-950">${rupiah(item.saldo)}</p>
-                            </div>
+                    <div class="mt-4 grid grid-cols-1 gap-2 min-[420px]:grid-cols-3">
+                        <div class="rounded-2xl bg-slate-100 p-3">
+                            <p class="text-[11px] font-semibold text-slate-500">Transaksi</p>
+                            <p class="mt-1 font-black text-slate-950">${item.total_transaksi || 0}</p>
                         </div>
-                    </button>
-                `
+
+                        <div class="rounded-2xl bg-emerald-50 p-3">
+                            <p class="text-[11px] font-semibold text-emerald-700">Masuk</p>
+                            <p class="mt-1 break-words font-black text-emerald-700">${rupiah(item.total_pemasukan)}</p>
+                        </div>
+
+                        <div class="rounded-2xl bg-slate-100 p-3">
+                            <p class="text-[11px] font-semibold text-slate-500">Saldo</p>
+                            <p class="mt-1 break-words font-black text-slate-950">${rupiah(item.saldo)}</p>
+                        </div>
+                    </div>
+                </button>
+            `
             }).join('')
         }
 
@@ -633,35 +630,22 @@
 
         function renderDetail(data) {
             if (!data.length) {
-                const emptyState = `
-                    <div class="rounded-3xl bg-slate-50 px-5 py-12 text-center">
-                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-white text-2xl shadow-sm">
-                            Ø
-                        </div>
-                        <h3 class="mt-5 text-lg font-black">Detail tidak tersedia</h3>
-                        <p class="mt-2 text-sm leading-6 text-slate-500">
-                            Backup ini belum memiliki transaksi atau data tidak ditemukan.
-                        </p>
-                    </div>
-                `
-
-                el.detailCards.innerHTML = emptyState
+                el.detailCards.innerHTML = `
+                <div class="rounded-3xl bg-slate-50 px-5 py-12 text-center">
+                    <h3 class="mt-5 text-lg font-black">Detail tidak tersedia</h3>
+                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                        Backup ini belum memiliki transaksi atau data tidak ditemukan.
+                    </p>
+                </div>
+            `
 
                 el.detailTable.innerHTML = `
-                    <tr>
-                        <td colspan="4" class="px-5 py-20 text-center">
-                            <div class="mx-auto max-w-sm">
-                                <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-100 text-2xl">
-                                    Ø
-                                </div>
-                                <h3 class="mt-5 text-lg font-black">Detail tidak tersedia</h3>
-                                <p class="mt-2 text-sm leading-6 text-slate-500">
-                                    Backup ini belum memiliki transaksi atau data tidak ditemukan.
-                                </p>
-                            </div>
-                        </td>
-                    </tr>
-                `
+                <tr>
+                    <td colspan="4" class="px-5 py-20 text-center">
+                        Detail tidak tersedia
+                    </td>
+                </tr>
+            `
 
                 el.detailPemasukan.textContent = rupiah(0)
                 el.detailPengeluaran.textContent = rupiah(0)
@@ -683,64 +667,42 @@
                 }
 
                 return `
-                    <div class="mb-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
-                        <div class="flex items-start justify-between gap-3">
-                            <div class="min-w-0">
-                                <p class="font-black text-slate-950">${escapeHtml(item.uraian)}</p>
-                                <p class="mt-1 text-xs text-slate-400">${formatDate(item.tgl_jam)}</p>
-                                <p class="mt-1 break-all text-xs text-slate-400">ID ${escapeHtml(item.id)}</p>
-                            </div>
-
-                            <span class="shrink-0 rounded-full px-3 py-1 text-xs font-bold ${isIncome ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}">
-                                ${isIncome ? 'Masuk' : 'Keluar'}
-                            </span>
-                        </div>
-
-                        <div class="mt-4 rounded-2xl ${isIncome ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-700'} p-3">
-                            <p class="text-xs font-semibold">Nominal</p>
-                            <p class="mt-1 break-words text-xl font-black">
-                                ${isIncome ? '+' : '-'} ${rupiah(nominal)}
-                            </p>
-                        </div>
-                    </div>
-                `
+                <div class="mb-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <p class="font-black text-slate-950">${escapeHtml(item.uraian)}</p>
+                    <p class="mt-1 text-xs text-slate-400">${formatDate(item.tgl_jam)}</p>
+                    <p class="mt-4 break-words text-xl font-black ${isIncome ? 'text-emerald-700' : 'text-red-700'}">
+                        ${isIncome ? '+' : '-'} ${rupiah(nominal)}
+                    </p>
+                </div>
+            `
             }).join('')
-
-            let pemasukanTable = 0
-            let pengeluaranTable = 0
 
             el.detailTable.innerHTML = data.map(item => {
                 const nominal = Number(item.nominal || 0)
                 const isIncome = item.jenis === '+'
 
-                if (isIncome) {
-                    pemasukanTable += nominal
-                } else {
-                    pengeluaranTable += nominal
-                }
-
                 return `
-                    <tr class="transition hover:bg-slate-50">
-                        <td class="whitespace-nowrap px-5 py-4 text-slate-600">
-                            ${formatDate(item.tgl_jam)}
-                        </td>
+                <tr class="transition hover:bg-slate-50">
+                    <td class="whitespace-nowrap px-5 py-4 text-slate-600">
+                        ${formatDate(item.tgl_jam)}
+                    </td>
 
-                        <td class="px-5 py-4">
-                            <p class="font-bold text-slate-950">${escapeHtml(item.uraian)}</p>
-                            <p class="mt-1 text-xs text-slate-400">Transaksi ID ${escapeHtml(item.id)}</p>
-                        </td>
+                    <td class="px-5 py-4">
+                        <p class="font-bold text-slate-950">${escapeHtml(item.uraian)}</p>
+                        <p class="mt-1 text-xs text-slate-400">Transaksi ID ${escapeHtml(item.id)}</p>
+                    </td>
 
-                        <td class="px-5 py-4">
-                            <span class="rounded-full px-3 py-1 text-xs font-bold ${isIncome ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}">
-                                ${isIncome ? 'Pemasukan' : 'Pengeluaran'}
-                            </span>
-                        </td>
+                    <td class="px-5 py-4">
+                        <span class="rounded-full px-3 py-1 text-xs font-bold ${isIncome ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}">
+                            ${isIncome ? 'Pemasukan' : 'Pengeluaran'}
+                        </span>
+                    </td>
 
-                        <td class="whitespace-nowrap px-5 py-4 text-right font-black ${isIncome ? 'text-emerald-600' : 'text-red-600'}">
-                            ${isIncome ? '+' : '-'} ${rupiah(nominal)}
-                        </td>
-                    </tr>
-                `
+                    <td class="whitespace-nowrap px-5 py-4 text-right font-black ${isIncome ? 'text-emerald-600' : 'text-red-600'}">
+                        ${isIncome ? '+' : '-'} ${rupiah(nominal)}
+                    </td>
+                </tr>
+            `
             }).join('')
 
             el.detailPemasukan.textContent = rupiah(pemasukan)
@@ -758,17 +720,16 @@
                 el.syncBar.style.width = '35%'
 
                 await loadSummary()
-
                 el.syncBar.style.width = '72%'
 
                 await loadBackupList(forceRender)
-
                 el.syncBar.style.width = '100%'
+
                 setStatus('Realtime aktif', 'success')
 
-                if (forceRender) {
-                    showToast('Data berhasil disinkronkan')
-                }
+                // if (forceRender) {
+                //     showToast('Data berhasil disinkronkan')
+                // }
 
                 setTimeout(() => {
                     el.syncBar.style.width = '65%'
@@ -782,12 +743,28 @@
             }
         }
 
-        el.searchBackup.addEventListener('input', function () {
+        function startRealtime() {
+            if (!window.Echo) {
+                console.error('window.Echo belum tersedia. Periksa resources/js/app.js dan urutan Vite.')
+                setStatus('Echo belum siap', 'error')
+                return
+            }
+
+            window.Echo.channel('backup-monitor')
+                .listen('.backup.updated', function(event) {
+                    console.log('Event backup.updated masuk:', event)
+                    loadAll(true)
+                })
+
+            console.log('Subscribe channel backup-monitor berhasil')
+        }
+
+        el.searchBackup.addEventListener('input', function() {
             searchKeyword = this.value
             renderBackupList()
         })
 
-        el.backupList.addEventListener('click', function (event) {
+        el.backupList.addEventListener('click', function(event) {
             const card = event.target.closest('.backup-card')
 
             if (!card) return
@@ -798,9 +775,10 @@
 
         loadAll(true)
 
-        setInterval(() => {
-            loadAll(false)
-        }, 2000)
+        setTimeout(function() {
+            startRealtime()
+        }, 500)
     </script>
 </body>
+
 </html>

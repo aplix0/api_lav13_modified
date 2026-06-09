@@ -8,6 +8,7 @@ use App\Models\BackupTransaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Events\BackupUpdated;
 
 class BackupController extends Controller
 {
@@ -28,6 +29,7 @@ class BackupController extends Controller
             'nama_backup.required' => 'Nama backup wajib diisi',
             'dtx.required' => 'Data backup wajib dikirim',
         ]);
+
 
         if ($validator->fails()) {
             return response()->json([
@@ -105,6 +107,9 @@ class BackupController extends Controller
                     }
                 }
             });
+
+            event(new BackupUpdated($idBackup));
+
 
             return response()->json([
                 'kode' => '01',
